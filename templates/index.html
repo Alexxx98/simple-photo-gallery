@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Album</title>
+</head>
+<body>
+    <form id="images-form" action="/upload" method="post" enctype="multipart/form-data">
+        <label id="images-label" for="images">+</label>
+        <input type="file" id="images" name="images" accept="image/*" multiple>
+        <div id="img-preview-container"></div>
+        <button type="submit">Add</button>
+    </form>
+    <div class="img-container">
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
