@@ -3,18 +3,19 @@ from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
 
 import os
+import psycopg2
 
-
-try:
-    os.listdir(os.path.join(os.getcwd(), 'upload-folder'))
-except:
-    os.mkdir(os.path.join(os.getcwd(), 'upload-folder'))
 
 load_dotenv()
 
+POSTGRES_USER = os.getenv('POSTGRES_USER')
+POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
+POSTGRES_DB = os.getenv('POSTGRES_DB')
+POSTGRES_HOST = os.getenv('POSTGRES_HOST')
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
-app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'upload-folder')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'posgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}/{POSTGRES_DB}'
 
 
 @app.route('/')
@@ -28,6 +29,7 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
+    db_connect = connect_to_db()
     images = request.files.getlist('images')
     print(images)
 

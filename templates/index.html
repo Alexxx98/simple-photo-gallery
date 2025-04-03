@@ -8,12 +8,10 @@
     <title>Album</title>
 </head>
 <body>
-    <form id="images-form" action="/upload" method="post" enctype="multipart/form-data">
-        <label id="images-label" for="images">+</label>
-        <input type="file" id="images" name="images" accept="image/*" multiple>
-        <div id="img-preview-container"></div>
-        <button type="submit">Add</button>
-    </form>
+    <label id="images-label" for="images">+</label>
+    <input type="file" id="images" name="images" accept="image/*" multiple>
+    <div id="img-preview-container"></div>
+    <button id="send-images" type="submit">Add</button>
     <div class="img-container">
     </div>
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
